@@ -2673,7 +2673,7 @@ dependencies = [
 [[package]]
 name = "pubgrub"
 version = "0.2.1"
-source = "git+https://github.com/astral-sh/pubgrub?rev=57832d0588fbb7aab824813481104761dc1c7740#57832d0588fbb7aab824813481104761dc1c7740"
+source = "git+https://github.com/astral-sh/pubgrub?rev=05e8d12cea8d72c6d2d017900e478d0abd28fef4#05e8d12cea8d72c6d2d017900e478d0abd28fef4"
 dependencies = [
  "indexmap",
  "log",
@@ -4398,7 +4398,7 @@ checksum = "f8c5f0a0af699448548ad1a2fbf920fb4bee257eae39953ba95cb84891a0446a"
 
 [[package]]
 name = "uv"
-version = "0.5.9"
+version = "0.5.10"
 dependencies = [
  "anstream",
  "anyhow",
@@ -4536,6 +4536,7 @@ dependencies = [
  "uv-distribution",
  "uv-distribution-filename",
  "uv-distribution-types",
+ "uv-extract",
  "uv-install-wheel",
  "uv-pep440",
  "uv-pep508",
@@ -4584,7 +4585,6 @@ name = "uv-build-frontend"
 version = "0.0.1"
 dependencies = [
  "anstream",
- "anyhow",
  "fs-err 3.0.0",
  "indoc",
  "insta",
@@ -4802,10 +4802,12 @@ dependencies = [
  "uv-client",
  "uv-distribution-filename",
  "uv-distribution-types",
+ "uv-extract",
  "uv-installer",
  "uv-macros",
  "uv-options-metadata",
  "uv-pep508",
+ "uv-performance-flate2-backend",
  "uv-performance-memory-allocator",
  "uv-pypi-types",
  "uv-python",
@@ -4831,6 +4833,7 @@ dependencies = [
  "futures",
  "itertools 0.13.0",
  "rustc-hash",
+ "thiserror 2.0.7",
  "tokio",
  "tracing",
  "uv-build-backend",
@@ -4844,6 +4847,7 @@ dependencies = [
  "uv-git",
  "uv-install-wheel",
  "uv-installer",
+ "uv-platform-tags",
  "uv-pypi-types",
  "uv-python",
  "uv-resolver",
@@ -5598,7 +5602,7 @@ dependencies = [
 
 [[package]]
 name = "uv-version"
-version = "0.5.9"
+version = "0.5.10"
 
 [[package]]
 name = "uv-virtualenv"
@@ -5672,7 +5676,7 @@ checksum = "830b7e5d4d90034032940e4ace0d9a9a057e7a45cd94e6c007832e39edb82f6d"
 [[package]]
 name = "version-ranges"
 version = "0.1.1"
-source = "git+https://github.com/astral-sh/pubgrub?rev=57832d0588fbb7aab824813481104761dc1c7740#57832d0588fbb7aab824813481104761dc1c7740"
+source = "git+https://github.com/astral-sh/pubgrub?rev=05e8d12cea8d72c6d2d017900e478d0abd28fef4#05e8d12cea8d72c6d2d017900e478d0abd28fef4"
 dependencies = [
  "smallvec",
 ]

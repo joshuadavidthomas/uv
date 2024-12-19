@@ -1014,7 +1014,7 @@ fn lock_wheel_url() -> Result<()> {
             { name = "trio", marker = "extra == 'trio'", specifier = ">=0.23" },
             { name = "trustme", marker = "extra == 'test'" },
             { name = "typing-extensions", marker = "python_full_version < '3.11'", specifier = ">=4.1" },
-            { name = "uvloop", marker = "platform_python_implementation == 'CPython' and platform_system != 'Windows' and extra == 'test'", specifier = ">=0.17" },
+            { name = "uvloop", marker = "platform_python_implementation == 'CPython' and sys_platform != 'win32' and extra == 'test'", specifier = ">=0.17" },
         ]
 
         [[package]]
@@ -1159,7 +1159,7 @@ fn lock_sdist_url() -> Result<()> {
             { name = "trio", marker = "extra == 'trio'", specifier = ">=0.23" },
             { name = "trustme", marker = "extra == 'test'" },
             { name = "typing-extensions", marker = "python_full_version < '3.11'", specifier = ">=4.1" },
-            { name = "uvloop", marker = "platform_python_implementation == 'CPython' and platform_system != 'Windows' and extra == 'test'", specifier = ">=0.17" },
+            { name = "uvloop", marker = "platform_python_implementation == 'CPython' and sys_platform != 'win32' and extra == 'test'", specifier = ">=0.17" },
         ]
 
         [[package]]
@@ -1675,7 +1675,7 @@ fn lock_dependency_extra() -> Result<()> {
         version = "8.1.7"
         source = { registry = "https://pypi.org/simple" }
         dependencies = [
-            { name = "colorama", marker = "platform_system == 'Windows'" },
+            { name = "colorama", marker = "sys_platform == 'win32'" },
         ]
         sdist = { url = "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de", size = 336121 }
         wheels = [
@@ -1860,9 +1860,9 @@ fn lock_conditional_dependency_extra() -> Result<()> {
         version = 1
         requires-python = ">=3.7"
         resolution-markers = [
+            "python_full_version >= '3.10'",
             "python_full_version >= '3.8' and python_full_version < '3.10'",
             "python_full_version < '3.8'",
-            "python_full_version >= '3.10'",
         ]
 
         [options]
@@ -2045,8 +2045,8 @@ fn lock_conditional_dependency_extra() -> Result<()> {
         version = "2.2.1"
         source = { registry = "https://pypi.org/simple" }
         resolution-markers = [
-            "python_full_version >= '3.8' and python_full_version < '3.10'",
             "python_full_version >= '3.10'",
+            "python_full_version >= '3.8' and python_full_version < '3.10'",
         ]
         sdist = { url = "https://files.pythonhosted.org/packages/7a/50/7fd50a27caa0652cd4caf224aa87741ea41d3265ad13f010886167cfcc79/urllib3-2.2.1.tar.gz", hash = "sha256:d0570876c61ab9e520d776c38acbbb5b05a776d3f9ff98a5c8fd5162a444cf19", size = 291020 }
         wheels = [
@@ -2180,7 +2180,7 @@ fn lock_dependency_non_existent_extra() -> Result<()> {
         version = "8.1.7"
         source = { registry = "https://pypi.org/simple" }
         dependencies = [
-            { name = "colorama", marker = "platform_system == 'Windows'" },
+            { name = "colorama", marker = "sys_platform == 'win32'" },
         ]
         sdist = { url = "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de", size = 336121 }
         wheels = [
@@ -2961,8 +2961,8 @@ fn lock_partial_git() -> Result<()> {
         version = 1
         requires-python = ">=3.10"
         resolution-markers = [
-            "python_full_version < '3.12'",
             "python_full_version >= '3.12'",
+            "python_full_version < '3.12'",
         ]
 
         [options]
@@ -3232,8 +3232,8 @@ fn lock_requires_python() -> Result<()> {
 
     ----- stderr -----
       × No solution found when resolving dependencies for split (python_full_version >= '3.7' and python_full_version < '3.7.9'):
-      ╰─▶ Because the requested Python version (>=3.7) does not satisfy Python>=3.8 and the requested Python version (>=3.7) does not satisfy Python>=3.7.9,<3.8, we can conclude that Python>=3.7.9 is incompatible.
-          And because pygls>=1.1.0,<=1.2.1 depends on Python>=3.7.9,<4 and only pygls<=1.3.0 is available, we can conclude that all of:
+      ╰─▶ Because the requested Python version (>=3.7) does not satisfy Python>=3.7.9 and pygls>=1.1.0,<=1.2.1 depends on Python>=3.7.9,<4, we can conclude that pygls>=1.1.0,<=1.2.1 cannot be used.
+          And because only pygls<=1.3.0 is available, we can conclude that all of:
               pygls>=1.1.0,<1.3.0
               pygls>1.3.0
            cannot be used. (1)
@@ -5143,10 +5143,10 @@ fn lock_python_version_marker_complement() -> Result<()> {
         version = 1
         requires-python = ">=3.8"
         resolution-markers = [
-            "python_full_version < '3.10'",
-            "python_full_version == '3.10'",
-            "python_full_version > '3.10' and python_full_version < '3.11'",
             "python_full_version >= '3.11'",
+            "python_full_version > '3.10' and python_full_version < '3.11'",
+            "python_full_version == '3.10'",
+            "python_full_version < '3.10'",
         ]
 
         [options]
@@ -12481,9 +12481,9 @@ fn lock_narrowed_python_version() -> Result<()> {
         version = 1
         requires-python = ">=3.7"
         resolution-markers = [
-            "python_full_version < '3.9'",
-            "python_full_version >= '3.9' and python_full_version < '3.11'",
             "python_full_version >= '3.11'",
+            "python_full_version >= '3.9' and python_full_version < '3.11'",
+            "python_full_version < '3.9'",
         ]
 
         [options]
@@ -12694,10 +12694,10 @@ fn lock_constrained_environment() -> Result<()> {
         version = 1
         requires-python = ">=3.12"
         resolution-markers = [
-            "platform_system != 'Windows'",
+            "sys_platform != 'win32'",
         ]
         supported-markers = [
-            "platform_system != 'Windows'",
+            "sys_platform != 'win32'",
         ]
 
         [options]
@@ -12708,11 +12708,11 @@ fn lock_constrained_environment() -> Result<()> {
         version = "24.3.0"
         source = { registry = "https://pypi.org/simple" }
         dependencies = [
-            { name = "click", marker = "platform_system != 'Windows'" },
-            { name = "mypy-extensions", marker = "platform_system != 'Windows'" },
-            { name = "packaging", marker = "platform_system != 'Windows'" },
-            { name = "pathspec", marker = "platform_system != 'Windows'" },
-            { name = "platformdirs", marker = "platform_system != 'Windows'" },
+            { name = "click", marker = "sys_platform != 'win32'" },
+            { name = "mypy-extensions", marker = "sys_platform != 'win32'" },
+            { name = "packaging", marker = "sys_platform != 'win32'" },
+            { name = "pathspec", marker = "sys_platform != 'win32'" },
+            { name = "platformdirs", marker = "sys_platform != 'win32'" },
         ]
         sdist = { url = "https://files.pythonhosted.org/packages/8f/5f/bac24a952668c7482cfdb4ebf91ba57a796c9da8829363a772040c1a3312/black-24.3.0.tar.gz", hash = "sha256:a0c9c4a0771afc6919578cec71ce82a3e31e054904e7197deacbc9382671c41f", size = 634292 }
         wheels = [
@@ -12772,7 +12772,7 @@ fn lock_constrained_environment() -> Result<()> {
         version = "0.1.0"
         source = { editable = "." }
         dependencies = [
-            { name = "black", marker = "platform_system != 'Windows'" },
+            { name = "black", marker = "sys_platform != 'win32'" },
         ]
 
         [package.metadata]
@@ -12907,7 +12907,7 @@ fn lock_constrained_environment() -> Result<()> {
         version = "8.1.7"
         source = { registry = "https://pypi.org/simple" }
         dependencies = [
-            { name = "colorama", marker = "platform_system == 'Windows'" },
+            { name = "colorama", marker = "sys_platform == 'win32'" },
         ]
         sdist = { url = "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de", size = 336121 }
         wheels = [
@@ -13024,10 +13024,10 @@ fn lock_constrained_environment_legacy() -> Result<()> {
         version = 1
         requires-python = ">=3.12"
         resolution-markers = [
-            "platform_system != 'Windows'",
+            "sys_platform != 'win32'",
         ]
         supported-markers = [
-            "platform_system != 'Windows'",
+            "sys_platform != 'win32'",
         ]
 
         [options]
@@ -13043,11 +13043,11 @@ fn lock_constrained_environment_legacy() -> Result<()> {
         version = "24.3.0"
         source = { registry = "https://pypi.org/simple" }
         dependencies = [
-            { name = "click", marker = "platform_system != 'Windows'" },
-            { name = "mypy-extensions", marker = "platform_system != 'Windows'" },
-            { name = "packaging", marker = "platform_system != 'Windows'" },
-            { name = "pathspec", marker = "platform_system != 'Windows'" },
-            { name = "platformdirs", marker = "platform_system != 'Windows'" },
+            { name = "click", marker = "sys_platform != 'win32'" },
+            { name = "mypy-extensions", marker = "sys_platform != 'win32'" },
+            { name = "packaging", marker = "sys_platform != 'win32'" },
+            { name = "pathspec", marker = "sys_platform != 'win32'" },
+            { name = "platformdirs", marker = "sys_platform != 'win32'" },
         ]
         sdist = { url = "https://files.pythonhosted.org/packages/8f/5f/bac24a952668c7482cfdb4ebf91ba57a796c9da8829363a772040c1a3312/black-24.3.0.tar.gz", hash = "sha256:a0c9c4a0771afc6919578cec71ce82a3e31e054904e7197deacbc9382671c41f", size = 634292 }
         wheels = [
@@ -13062,7 +13062,7 @@ fn lock_constrained_environment_legacy() -> Result<()> {
         version = "0.1.0"
         source = { virtual = "child" }
         dependencies = [
-            { name = "black", marker = "platform_system != 'Windows'" },
+            { name = "black", marker = "sys_platform != 'win32'" },
         ]
 
         [package.metadata]
@@ -13169,9 +13169,9 @@ fn lock_overlapping_environment() -> Result<()> {
     ----- stdout -----
 
     ----- stderr -----
-    error: Supported environments must be disjoint, but the following markers overlap: `platform_system != 'Windows'` and `python_full_version >= '3.11'`.
+    error: Supported environments must be disjoint, but the following markers overlap: `sys_platform != 'win32'` and `python_full_version >= '3.11'`.
 
-    hint: replace `python_full_version >= '3.11'` with `python_full_version >= '3.11' and platform_system == 'Windows'`.
+    hint: replace `python_full_version >= '3.11'` with `python_full_version >= '3.11' and sys_platform == 'win32'`.
     "###);
 
     Ok(())
@@ -13216,8 +13216,8 @@ fn lock_non_project_fork() -> Result<()> {
         version = 1
         requires-python = ">=3.10"
         resolution-markers = [
-            "python_full_version < '3.11'",
             "python_full_version >= '3.11'",
+            "python_full_version < '3.11'",
         ]
 
         [options]
@@ -14433,6 +14433,7 @@ fn lock_explicit_default_index() -> Result<()> {
     DEBUG Adding transitive dependency for project==0.1.0: anyio*
     DEBUG Searching for a compatible version of anyio (*)
     DEBUG No compatible version found for: anyio
+    DEBUG Recording unit propagation conflict of anyio from incompatibility of (project)
     DEBUG Searching for a compatible version of project @ file://[TEMP_DIR]/ (<0.1.0 | >0.1.0)
     DEBUG No compatible version found for: project
       × No solution found when resolving dependencies:
@@ -15048,7 +15049,7 @@ fn lock_explicit_virtual_project() -> Result<()> {
         version = "8.1.7"
         source = { registry = "https://pypi.org/simple" }
         dependencies = [
-            { name = "colorama", marker = "platform_system == 'Windows'" },
+            { name = "colorama", marker = "sys_platform == 'win32'" },
         ]
         sdist = { url = "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de", size = 336121 }
         wheels = [
@@ -15265,7 +15266,7 @@ fn lock_implicit_virtual_project() -> Result<()> {
         version = "8.1.7"
         source = { registry = "https://pypi.org/simple" }
         dependencies = [
-            { name = "colorama", marker = "platform_system == 'Windows'" },
+            { name = "colorama", marker = "sys_platform == 'win32'" },
         ]
         sdist = { url = "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de", size = 336121 }
         wheels = [
@@ -15751,9 +15752,9 @@ fn lock_python_upper_bound() -> Result<()> {
         version = 1
         requires-python = ">=3.8"
         resolution-markers = [
-            "python_full_version >= '3.13'",
-            "python_full_version < '3.9'",
             "python_full_version >= '3.9' and python_full_version < '3.13'",
+            "python_full_version < '3.9'",
+            "python_full_version >= '3.13'",
         ]
 
         [options]
@@ -15764,7 +15765,7 @@ fn lock_python_upper_bound() -> Result<()> {
         version = "8.1.7"
         source = { registry = "https://pypi.org/simple" }
         dependencies = [
-            { name = "colorama", marker = "platform_system == 'Windows'" },
+            { name = "colorama", marker = "sys_platform == 'win32'" },
         ]
         sdist = { url = "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de", size = 336121 }
         wheels = [
@@ -16047,7 +16048,7 @@ fn lock_python_upper_bound() -> Result<()> {
         version = "4.66.2"
         source = { registry = "https://pypi.org/simple" }
         dependencies = [
-            { name = "colorama", marker = "platform_system == 'Windows'" },
+            { name = "colorama", marker = "sys_platform == 'win32'" },
         ]
         sdist = { url = "https://files.pythonhosted.org/packages/ea/85/3ce0f9f7d3f596e7ea57f4e5ce8c18cb44e4a9daa58ddb46ee0d13d6bff8/tqdm-4.66.2.tar.gz", hash = "sha256:6cd52cdf0fef0e0f543299cfc96fec90d7b8a7e88745f411ec33eb44d5ed3531", size = 169462 }
         wheels = [
@@ -16982,8 +16983,8 @@ fn lock_change_requires_python() -> Result<()> {
         version = 1
         requires-python = ">=3.12"
         resolution-markers = [
-            "python_full_version < '3.13'",
             "python_full_version >= '3.13'",
+            "python_full_version < '3.13'",
         ]
 
         [options]
@@ -17091,9 +17092,9 @@ fn lock_change_requires_python() -> Result<()> {
         version = 1
         requires-python = ">=3.10"
         resolution-markers = [
-            "python_full_version < '3.12'",
-            "python_full_version == '3.12.*'",
             "python_full_version >= '3.13'",
+            "python_full_version == '3.12.*'",
+            "python_full_version < '3.12'",
         ]
 
         [options]
@@ -17984,7 +17985,7 @@ fn lock_multiple_sources_respect_marker() -> Result<()> {
         name = "project"
         version = "0.1.0"
         requires-python = ">=3.12"
-        dependencies = ["iniconfig ; platform_system == 'Windows'"]
+        dependencies = ["iniconfig ; sys_platform == 'win32'"]
 
         [tool.uv.sources]
         iniconfig = [
@@ -18029,11 +18030,11 @@ fn lock_multiple_sources_respect_marker() -> Result<()> {
         version = "0.1.0"
         source = { virtual = "." }
         dependencies = [
-            { name = "iniconfig", marker = "platform_system == 'Windows' and sys_platform != 'darwin'" },
+            { name = "iniconfig", marker = "sys_platform == 'win32'" },
         ]
 
         [package.metadata]
-        requires-dist = [{ name = "iniconfig", marker = "platform_system == 'Windows' and sys_platform != 'darwin'" }]
+        requires-dist = [{ name = "iniconfig", marker = "sys_platform == 'win32'" }]
         "###
         );
     });
@@ -19496,8 +19497,9 @@ fn lock_derivation_chain_prod() -> Result<()> {
     ----- stdout -----
 
     ----- stderr -----
-      × Failed to download and build `wsgiref==0.1.2`
-      ╰─▶ Build backend failed to determine requirements with `build_wheel()` (exit status: 1)
+      × Failed to build `wsgiref==0.1.2`
+      ├─▶ The build backend returned an error
+      ╰─▶ Call to `setuptools.build_meta:__legacy__.build_wheel` failed (exit status: 1)
 
           [stderr]
           Traceback (most recent call last):
@@ -19517,6 +19519,7 @@ fn lock_derivation_chain_prod() -> Result<()> {
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
           SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
 
+          hint: This usually indicates a problem with the package or the build environment.
       help: `wsgiref` (v0.1.2) was included because `project` (v0.1.0) depends on `wsgiref==0.1.2`
     "###);
 
@@ -19554,8 +19557,9 @@ fn lock_derivation_chain_extra() -> Result<()> {
     ----- stdout -----
 
     ----- stderr -----
-      × Failed to download and build `wsgiref==0.1.2`
-      ╰─▶ Build backend failed to determine requirements with `build_wheel()` (exit status: 1)
+      × Failed to build `wsgiref==0.1.2`
+      ├─▶ The build backend returned an error
+      ╰─▶ Call to `setuptools.build_meta:__legacy__.build_wheel` failed (exit status: 1)
 
           [stderr]
           Traceback (most recent call last):
@@ -19575,6 +19579,7 @@ fn lock_derivation_chain_extra() -> Result<()> {
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
           SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
 
+          hint: This usually indicates a problem with the package or the build environment.
       help: `wsgiref` (v0.1.2) was included because `project[wsgi]` (v0.1.0) depends on `wsgiref>=0.1`
     "###);
 
@@ -19614,8 +19619,9 @@ fn lock_derivation_chain_group() -> Result<()> {
     ----- stdout -----
 
     ----- stderr -----
-      × Failed to download and build `wsgiref==0.1.2`
-      ╰─▶ Build backend failed to determine requirements with `build_wheel()` (exit status: 1)
+      × Failed to build `wsgiref==0.1.2`
+      ├─▶ The build backend returned an error
+      ╰─▶ Call to `setuptools.build_meta:__legacy__.build_wheel` failed (exit status: 1)
 
           [stderr]
           Traceback (most recent call last):
@@ -19635,6 +19641,7 @@ fn lock_derivation_chain_group() -> Result<()> {
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
           SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
 
+          hint: This usually indicates a problem with the package or the build environment.
       help: `wsgiref` (v0.1.2) was included because `project:wsgi` (v0.1.0) depends on `wsgiref`
     "###);
 
@@ -19685,8 +19692,9 @@ fn lock_derivation_chain_extended() -> Result<()> {
     ----- stdout -----
 
     ----- stderr -----
-      × Failed to download and build `wsgiref==0.1.2`
-      ╰─▶ Build backend failed to determine requirements with `build_wheel()` (exit status: 1)
+      × Failed to build `wsgiref==0.1.2`
+      ├─▶ The build backend returned an error
+      ╰─▶ Call to `setuptools.build_meta:__legacy__.build_wheel` failed (exit status: 1)
 
           [stderr]
           Traceback (most recent call last):
@@ -19706,6 +19714,7 @@ fn lock_derivation_chain_extended() -> Result<()> {
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
           SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
 
+          hint: This usually indicates a problem with the package or the build environment.
       help: `wsgiref` (v0.1.2) was included because `project` (v0.1.0) depends on `child` (v0.1.0) which depends on `wsgiref>=0.1, <0.2`
     "###);
 

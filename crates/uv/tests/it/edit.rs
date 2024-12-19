@@ -1113,8 +1113,8 @@ fn add_remove_dev() -> Result<()> {
     ----- stdout -----
 
     ----- stderr -----
-    warning: `anyio` is in the `dev` group; try calling `uv remove --group dev`
-    error: The dependency `anyio` could not be found in `dependencies`
+    hint: `anyio` is in the `dev` group (try: `uv remove anyio --group dev`)
+    error: The dependency `anyio` could not be found in `project.dependencies`
     "###);
 
     // Remove the dependency.
@@ -1336,8 +1336,8 @@ fn add_remove_optional() -> Result<()> {
     ----- stdout -----
 
     ----- stderr -----
-    warning: `anyio` is an optional dependency; try calling `uv remove --optional io`
-    error: The dependency `anyio` could not be found in `dependencies`
+    hint: `anyio` is an optional dependency (try: `uv remove anyio --optional io`)
+    error: The dependency `anyio` could not be found in `project.dependencies`
     "###);
 
     // Remove the dependency.
@@ -4817,7 +4817,7 @@ fn remove_group() -> Result<()> {
     ----- stdout -----
 
     ----- stderr -----
-    error: The dependency `anyio` could not be found in `dependency-groups`
+    error: The dependency `anyio` could not be found in `dependency-groups.test`
     "###);
 
     let pyproject_toml = context.read("pyproject.toml");
@@ -4845,7 +4845,7 @@ fn remove_group() -> Result<()> {
     ----- stdout -----
 
     ----- stderr -----
-    error: The dependency `anyio` could not be found in `dependency-groups`
+    error: The dependency `anyio` could not be found in `dependency-groups.test`
     "###);
 
     let pyproject_toml = context.temp_dir.child("pyproject.toml");
@@ -4863,8 +4863,8 @@ fn remove_group() -> Result<()> {
     ----- stdout -----
 
     ----- stderr -----
-    warning: `anyio` is a production dependency
-    error: The dependency `anyio` could not be found in `dependency-groups`
+    hint: `anyio` is a production dependency
+    error: The dependency `anyio` could not be found in `dependency-groups.test`
     "###);
 
     Ok(())
@@ -5559,7 +5559,8 @@ fn fail_to_add_revert_project() -> Result<()> {
     ----- stderr -----
     Resolved 3 packages in [TIME]
       × Failed to build `child @ file://[TEMP_DIR]/child`
-      ╰─▶ Build backend failed to determine requirements with `build_wheel()` (exit status: 1)
+      ├─▶ The build backend returned an error
+      ╰─▶ Call to `setuptools.build_meta.build_wheel` failed (exit status: 1)
 
           [stderr]
           Traceback (most recent call last):
@@ -5574,6 +5575,7 @@ fn fail_to_add_revert_project() -> Result<()> {
             File "<string>", line 1, in <module>
           ZeroDivisionError: division by zero
 
+          hint: This usually indicates a problem with the package or the build environment.
       help: `child` was included because `parent` (v0.1.0) depends on `child`
     "###);
 
@@ -5668,7 +5670,8 @@ fn fail_to_edit_revert_project() -> Result<()> {
     ----- stderr -----
     Resolved 3 packages in [TIME]
       × Failed to build `child @ file://[TEMP_DIR]/child`
-      ╰─▶ Build backend failed to determine requirements with `build_wheel()` (exit status: 1)
+      ├─▶ The build backend returned an error
+      ╰─▶ Call to `setuptools.build_meta.build_wheel` failed (exit status: 1)
 
           [stderr]
           Traceback (most recent call last):
@@ -5683,6 +5686,7 @@ fn fail_to_edit_revert_project() -> Result<()> {
             File "<string>", line 1, in <module>
           ZeroDivisionError: division by zero
 
+          hint: This usually indicates a problem with the package or the build environment.
       help: `child` was included because `parent` (v0.1.0) depends on `child`
     "###);
 
