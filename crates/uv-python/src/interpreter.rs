@@ -434,7 +434,7 @@ impl Interpreter {
     /// `python-build-standalone`; if it returns `false`, the interpreter is definitely _not_ from
     /// `python-build-standalone`.
     ///
-    /// See: <https://github.com/indygreg/python-build-standalone/issues/382>
+    /// See: <https://github.com/astral-sh/python-build-standalone/issues/382>
     pub fn is_standalone(&self) -> bool {
         self.standalone
     }
@@ -598,7 +598,7 @@ enum InterpreterInfoResult {
 pub enum InterpreterInfoError {
     #[error("Could not detect a glibc or a musl libc (while running on Linux)")]
     LibcNotFound,
-    #[error("Unknown operation system: `{operating_system}`")]
+    #[error("Unknown operating system: `{operating_system}`")]
     UnknownOperatingSystem { operating_system: String },
     #[error("Python {python_version} is not supported. Please use Python 3.8 or newer.")]
     UnsupportedPythonVersion { python_version: String },

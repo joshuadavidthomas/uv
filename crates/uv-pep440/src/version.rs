@@ -256,7 +256,7 @@ impl std::fmt::Display for OperatorParseError {
 ///
 /// ```rust
 /// use std::str::FromStr;
-/// use pep440_rs::Version;
+/// use uv_pep440::Version;
 ///
 /// let version = Version::from_str("1.19").unwrap();
 /// ```
@@ -578,6 +578,21 @@ impl Version {
     #[must_use]
     pub fn only_release(&self) -> Self {
         Self::new(self.release().iter().copied())
+    }
+
+    /// Return the version with trailing `.0` release segments removed.
+    ///
+    /// # Panics
+    ///
+    /// When the release is all zero segments.
+    #[inline]
+    #[must_use]
+    pub fn without_trailing_zeros(self) -> Self {
+        let mut release = self.release().to_vec();
+        while let Some(0) = release.last() {
+            release.pop();
+        }
+        self.with_release(release)
     }
 
     /// Set the min-release component and return the updated version.
